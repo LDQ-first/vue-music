@@ -1,31 +1,60 @@
 <template>
     <div  class="recommend" ref="recommend">
-        
+      <div ref="scroll" class="recommend-content">
+        <div>
+          <div v-if="recommends.length" class="slider-wrapper">
+            <slider>
+              <div v-for="(item, index) in recommends" :key = "index">
+                <a :href="item.linkUrl">
+                  <img :src="item.picUrl" class="needsclick"  alt="">
+                </a>
+              </div>
+            </slider>
+          </div>
+          <div class="recommend-list">
+              <h1 class="list-title">热门歌单推荐</h1>
+          </div>
+        </div>
+          
+      </div>
     </div>
 </template>
 
 <script>
+    import { getRecommend, getDiscList } from '../../api/recommend'
+    import { ERR_OK } from '../../api/config'
+    import Slider from '../../base/slider/slider.vue'
+
     export default {
         name: 'recommend',
         data() {
             return {
-
+              recommends: []
             }
         },
         computed: {
-
+          
         },
         created() {
-
+          this._getRecommend()
         },
         components: {
-
+          Slider
         },
         watch: {
 
         },
         methods: {
+          _getRecommend() {
+            getRecommend().then(res => {
+              if (res.code === ERR_OK) {
+                console.log('res.data.slider: ', res.data.slider)
+                this.recommends = res.data.slider
+              } else {
 
+              }
+            })
+          }
         }
 
     }
