@@ -29,7 +29,8 @@
         name: 'recommend',
         data() {
             return {
-              recommends: []
+              recommends: [],
+              discList: []
             }
         },
         computed: {
@@ -37,6 +38,7 @@
         },
         created() {
           this._getRecommend()
+          this._getDiscList()
         },
         components: {
           Slider
@@ -48,14 +50,21 @@
           _getRecommend() {
             getRecommend().then(res => {
               if (res.code === ERR_OK) {
-                console.log('res.data.slider: ', res.data.slider)
                 this.recommends = res.data.slider
               } else {
                 
               }
             })
+          },
+          _getDiscList() {
+              getDiscList().then((res) => {
+                if (res.code === ERR_OK) {
+                  this.discList = res.data.list
+                }
+              })
           }
         }
+        
 
     }
 </script>
