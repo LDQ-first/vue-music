@@ -16,7 +16,7 @@ export const getRecommend = () => {
 
 export const getDiscList = () => {
   const url = process.env.NODE_ENV === 'production' 
-  ? `http://ustbhuangyi.com/music/api/getDiscList` : 'api/getDiscList'
+  ? `https://bird.ioliu.cn/v2?url=http://ustbhuangyi.com/music/api/getDiscList` : 'api/getDiscList'
   const data = Object.assign({}, commonParams, {
     platform: 'yqq',
     hostUin: 0,
