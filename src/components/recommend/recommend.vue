@@ -51,7 +51,7 @@
                 console.log('res.data.slider: ', res.data.slider)
                 this.recommends = res.data.slider
               } else {
-
+                
               }
             })
           }
