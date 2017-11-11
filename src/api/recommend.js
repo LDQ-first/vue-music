@@ -15,7 +15,8 @@ export const getRecommend = () => {
 
 
 export const getDiscList = () => {
-  const url = 'api/getDiscList'
+  const url = process.env.NODE_ENV === 'production' 
+  ? `http://ustbhuangyi.com/music/api/getDiscList` : 'api/getDiscList'
   const data = Object.assign({}, commonParams, {
     platform: 'yqq',
     hostUin: 0,
