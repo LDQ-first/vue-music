@@ -1,6 +1,6 @@
 <template>
     <div  class="recommend" ref="recommend">
-      <div ref="scroll" class="recommend-content">
+      <scroll ref="scroll" class="recommend-content" :data="discList">
         <div>
           <div v-if="recommends.length" class="slider-wrapper">
             <slider>
@@ -13,10 +13,21 @@
           </div>
           <div class="recommend-list">
               <h1 class="list-title">热门歌单推荐</h1>
+              <ul>
+              <li @click="selectItem(item)" class="item" v-for="(item, index) in discList" :key="index">
+                <div class="icon">
+                  <img v-lazy="item.imgurl" width="60" height="60" />
+                </div>
+                <div class="text">
+                  <h2 class="name" v-html="item.creator.name"></h2>
+                  <p class="desc" v-html="item.dissname"></p>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
           
-      </div>
+      </scroll>
     </div>
 </template>
 
@@ -24,6 +35,7 @@
     import { getRecommend, getDiscList } from '../../api/recommend'
     import { ERR_OK } from '../../api/config'
     import Slider from '../../base/slider/slider.vue'
+    import Scroll from '../../base/scroll/scroll.vue'
 
     export default {
         name: 'recommend',
@@ -41,12 +53,18 @@
           this._getDiscList()
         },
         components: {
-          Slider
+          Slider,
+          Scroll
         },
         watch: {
 
         },
         methods: {
+          selectItem(item) {
+            this.$router.push({
+              path: `/recommend/${item.dissid}`
+            })
+          },
           _getRecommend() {
             getRecommend().then(res => {
               if (res.code === ERR_OK) {
