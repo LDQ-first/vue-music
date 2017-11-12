@@ -6,7 +6,7 @@
             <slider>
               <div v-for="(item, index) in recommends" :key = "index">
                 <a :href="item.linkUrl">
-                  <img :src="item.picUrl" class="needsclick"  alt="">
+                  <img :src="item.picUrl" class="needsclick" @load="loadImage" alt="">
                 </a>
               </div>
             </slider>
@@ -64,6 +64,12 @@
 
         },
         methods: {
+          loadImage() {
+            if (!this.checkLoaded) {
+              this.$refs.scroll.refresh()
+              this.checkLoaded = true
+            }
+          },
           selectItem(item) {
             this.$router.push({
               path: `/recommend/${item.dissid}`
