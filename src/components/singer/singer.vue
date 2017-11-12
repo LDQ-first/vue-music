@@ -1,6 +1,6 @@
 <template>
     <div class="singer" ref="singer">
-        
+        <list-view :data="singers" ref="list" ></list-view>
     </div>
 </template>
 
@@ -8,6 +8,8 @@
     import {getSingerList} from '../../api/singer.js'
     import {ERR_OK} from '../../api/config.js'
     import Singer from '../../common/js/singer.js'
+    import ListView from '../../base/listview/listview' 
+
 
     const HOT_NAME = '热门'
     const HOT_SINGER_LEN = 10
@@ -26,7 +28,7 @@
             this._getSingerList()
         },
         components: {
-
+            ListView
         },
         watch: {
 
@@ -91,6 +93,7 @@
     top: 88px
     bottom: 0
     width: 100%
+    overflow: hidden
 </style>
 
 
