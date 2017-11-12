@@ -4,7 +4,7 @@ const Recommend = resolve => require(['../components/recommend/recommend.vue'], 
 const Singer = resolve => require(['../components/singer/singer.vue'], resolve) 
 const Rank = resolve => require(['../components/rank/rank.vue'], resolve) 
 const Search = resolve => require(['../components/search/search.vue'], resolve) 
-
+const SingerDetail = resolve => require(['../components/singer-detail/singer-detail.vue'], resolve) 
 
 
 Vue.use(Router)
@@ -17,22 +17,28 @@ const routes = [
     },
     {
       path: '/recommend',
-      name: Recommend,
+      name: 'Recommend',
       component: Recommend
     },
     {
       path: '/singer',
-      name: Singer,
-      component: Singer
+      name: 'Singer',
+      component: Singer,
+      children: [
+        {
+          path: ':id',
+          component: SingerDetail
+        }
+      ]
     },
     {
       path: '/rank',
-      name: Rank,
+      name: 'Rank',
       component: Rank
     },
     {
       path: '/search',
-      name: Search,
+      name: 'Search',
       component: Search
     }
 ]

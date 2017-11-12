@@ -90,7 +90,7 @@
         },
         methods: {
             selectItem(item) {
-                
+                this.$emit('select', item)
             },
             onShortcutTouchStart(e) {
                 let anchorIndex = getData(e.target, 'index')
