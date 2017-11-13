@@ -37,6 +37,7 @@
     import Loading from '../../base/loading/loading.vue'
     import SongList from '../../base/song-list/song-list.vue'
     import {prefixStyle} from '../../common/js/dom'
+    import {mapActions} from 'vuex'
 
     const RESERVED_HEIGHT = 40
     const transform = prefixStyle('transform')
@@ -86,8 +87,14 @@
             this.$refs.list.$el.style.top = `${this.imageHeight}px`
         },
         methods: {
-            selectItem() {
-
+            ...mapActions([
+                'selectPlay'
+            ]),
+            selectItem(item, index) {
+                this.selectPlay({
+                    list: this.songs,
+                    index
+                })
             },
             back() {
                 this.$router.back()
@@ -98,6 +105,7 @@
             random() {
 
             }
+
         },
         watch: {
             scrollY(newY) {
